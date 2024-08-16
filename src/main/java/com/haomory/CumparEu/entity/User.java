@@ -1,27 +1,31 @@
 package com.haomory.CumparEu.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "user")
-@Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String first_name;
+    @JsonProperty("first_name")
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(nullable = false)
-    private String last_name;
+    @JsonProperty("last_name")
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
 
     @Column(nullable = false, unique = true)
@@ -30,23 +34,28 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private Date birth_date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @Column(name = "birth_date", nullable = false)
+    private LocalDate birthDate;
 
-    @Column(nullable = false)
-    private String phone_number;
+    @JsonProperty("phone_number")
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
 
-    @Column(nullable = false)
-    private Date last_login;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @Column(name = "last_login", nullable = false)
+    private LocalDate lastLogin;
 
-    @Column(nullable = false)
-    private Boolean is_active;
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive;
 
-    @Column(nullable = false, updatable = false)
-    private Date created_at;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDate createdAt;
 
-    @Column(nullable = false)
-    private Date updated_at;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @Column(name = "updated_at", nullable = false)
+    private LocalDate updatedAt;
 
 
 }
